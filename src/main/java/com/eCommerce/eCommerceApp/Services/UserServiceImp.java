@@ -37,6 +37,46 @@ public class UserServiceImp implements UserService, UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
+    @Override
+    public Users updateUser(String username, Users updateUser) {
+
+        Users existingUser = userRepository.findByUsername(username);
+        if (existingUser != null) {
+            if (updateUser.getFirstName() != null){
+                existingUser.setFirstName(updateUser.getFirstName());}
+            else {existingUser.setFirstName(existingUser.getFirstName());}
+
+            if (updateUser.getLastName() != null){
+                existingUser.setLastName(updateUser.getLastName());}
+            else {existingUser.setLastName(existingUser.getLastName());}
+
+            if (updateUser.getUsername() != null){
+                existingUser.setUsername(updateUser.getUsername());}
+            else {existingUser.setUsername(existingUser.getUsername());}
+
+            if (updateUser.getEmail() != null){
+                existingUser.setEmail(updateUser.getEmail());}
+            else {existingUser.setEmail(existingUser.getEmail());}
+
+
+            if (updateUser.getPhoneNumber() != null){
+                existingUser.setPhoneNumber(updateUser.getPhoneNumber());}
+            else {existingUser.setPhoneNumber(existingUser.getPhoneNumber());}
+
+
+            if (updateUser.getZipCode() != null){
+                existingUser.setZipCode(updateUser.getZipCode());}
+            else {existingUser.setZipCode(existingUser.getZipCode());}
+
+
+            if (updateUser.getState() != null){
+                existingUser.setState(updateUser.getState());}
+            else {existingUser.setState(existingUser.getState());}
+            return userRepository.save(existingUser);
+        }
+        return null;
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
