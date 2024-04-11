@@ -41,7 +41,7 @@ public class User implements UserDetails {
     .
 ```
 
-The User class is annotated with @Entity, indicating that it is a JPA entity. (Because no @Table annotation exists, it is assumed that this entity is mapped to a table named users.)
+The User class is annotated with @Entity, indicating that it is a JPA entity. (Because @Table annotation exists, it means that this entity is mapped to a table named users.)
 The Customer object’s id property is annotated with @Id so that JPA recognizes it as the object’s ID. The id property is also annotated with @GeneratedValue to indicate that the ID should be generated automatically.
 The other properties, firstName and lastName and so on, are left unannotated. It is assumed that they are mapped to columns that share the same names as the properties themselves.
 
