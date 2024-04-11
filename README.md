@@ -92,8 +92,46 @@ CREATE TABLE users (
 ```
 
 This script creates the "users" table in the database with columns for user details.
+## Testing
+```
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v3.1.10)
 
-
+2024-04-11T14:05:01.185+02:00  INFO 6904 --- [           main] c.e.e.ECommerceAppApplication            : Starting ECommerceAppApplication using Java 21.0.2 with PID 6904 (C:\Users\ZoneTech\Desktop\E-commerce-Web-App\target\classes started by ZoneTech in C:\Users\ZoneTech\Desktop\E-commerce-Web-App)
+2024-04-11T14:05:01.211+02:00  INFO 6904 --- [           main] c.e.e.ECommerceAppApplication            : No active profile set, falling back to 1 default profile: "default"
+2024-04-11T14:05:03.209+02:00  INFO 6904 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-04-11T14:05:03.370+02:00  INFO 6904 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 140 ms. Found 1 JPA repository interface.
+2024-04-11T14:05:04.833+02:00  INFO 6904 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2024-04-11T14:05:04.856+02:00  INFO 6904 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-04-11T14:05:04.857+02:00  INFO 6904 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-04-11T14:05:05.086+02:00  INFO 6904 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-04-11T14:05:05.088+02:00  INFO 6904 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3747 ms
+2024-04-11T14:05:05.428+02:00  INFO 6904 --- [           main] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 9.16.3 by Redgate
+2024-04-11T14:05:05.428+02:00  INFO 6904 --- [           main] o.f.c.internal.license.VersionPrinter    : See release notes here: https://rd.gt/416ObMi
+2024-04-11T14:05:05.428+02:00  INFO 6904 --- [           main] o.f.c.internal.license.VersionPrinter    : 
+2024-04-11T14:05:05.454+02:00  INFO 6904 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-04-11T14:05:06.476+02:00  INFO 6904 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@33a8c9c9
+2024-04-11T14:05:06.480+02:00  INFO 6904 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-04-11T14:05:06.539+02:00  INFO 6904 --- [           main] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:mysql://localhost:3306/findall (MySQL 8.2)
+2024-04-11T14:05:06.600+02:00  WARN 6904 --- [           main] o.f.c.internal.database.base.Database    : Flyway upgrade recommended: MySQL 8.2 is newer than this version of Flyway and support has not been tested. The latest supported version of MySQL is 8.0.
+2024-04-11T14:05:06.775+02:00  INFO 6904 --- [           main] o.f.core.internal.command.DbValidate     : Successfully validated 3 migrations (execution time 00:00.130s)
+2024-04-11T14:05:06.829+02:00  INFO 6904 --- [           main] o.f.core.internal.command.DbMigrate      : Current version of schema `findall`: 2
+2024-04-11T14:05:06.832+02:00  INFO 6904 --- [           main] o.f.core.internal.command.DbMigrate      : Schema `findall` is up to date. No migration necessary.
+2024-04-11T14:05:07.429+02:00  INFO 6904 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-04-11T14:05:07.662+02:00  INFO 6904 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.22.Final
+2024-04-11T14:05:07.670+02:00  INFO 6904 --- [           main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2024-04-11T14:05:10.641+02:00  INFO 6904 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-04-11T14:05:10.730+02:00  INFO 6904 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-04-11T14:05:11.950+02:00  WARN 6904 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-04-11T14:05:12.943+02:00  INFO 6904 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@73d7e7aa, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@349686e8, org.springframework.security.web.context.SecurityContextHolderFilter@70fcd3e5, org.springframework.security.web.header.HeaderWriterFilter@7adde776, org.springframework.security.web.authentication.logout.LogoutFilter@52e34db, com.eCommerce.eCommerceApp.Filter.JwtAuthenticationFilter@4d7fba20, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@9da386c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@299cddbf, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5c3e7128, org.springframework.security.web.session.SessionManagementFilter@20040c6e, org.springframework.security.web.access.ExceptionTranslationFilter@39ee07a9, org.springframework.security.web.access.intercept.AuthorizationFilter@48861d1]
+2024-04-11T14:05:13.642+02:00  INFO 6904 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2024-04-11T14:05:13.676+02:00  INFO 6904 --- [           main] c.e.e.ECommerceAppApplication            : Started ECommerceAppApplication in 13.419 seconds (process running for 15.638)
+```
 
 
 
