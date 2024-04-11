@@ -1,4 +1,4 @@
-##1.  Technology Selection
+## 1.  Technology Selection
 The project is developed in Spring Boot, utilizing Spring Data JPA for Object-Relational Mapping (ORM) and Flyway for database migrations.
 
 
