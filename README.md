@@ -92,7 +92,7 @@ CREATE TABLE users (
 ```
 
 This script creates the "users" table in the database with columns for user details.
-## Testing
+## 6. Testing
 ```
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
