@@ -56,7 +56,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 
 ## 4. Flyway Configuration for Database Migrations
-Flyway is used to manage database migrations. Configuration is done in the application.properties file: Konfigurimi i Flyway është bërë në file application.properties:
+Flyway is used to manage database migrations. Configuration is done in the application.properties file:
 ```
 spring.flyway.baseline-on-migrate=true
 spring.flyway.locations=classpath:db/migration
