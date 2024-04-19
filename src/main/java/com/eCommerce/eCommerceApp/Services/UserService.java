@@ -1,14 +1,15 @@
 package com.eCommerce.eCommerceApp.Services;
 
-import com.eCommerce.eCommerceApp.Models.Users;
-import org.springframework.stereotype.Service;
+import com.eCommerce.eCommerceApp.Models.User;
 
 import java.util.List;
 public interface UserService {
-    public void saveUser(Users user);
-    public List<Users> getAll();
+    public void saveUser(User user);
+    public List<User> getAll();
 
-    Users getUserById(int customerId);
+    User getUserById(int customerId);
 
-    Users findByUsername(String username);
+    User findByUsername(String username);
+    User updateUser(String username, User updateUser);
+    User deleteUser(String username); // Update this method signature
 }
