@@ -1,6 +1,6 @@
 package com.eCommerce.eCommerceApp.Filter;
 
-import com.eCommerce.eCommerceApp.Models.Users;
+import com.eCommerce.eCommerceApp.Models.User;
 import com.eCommerce.eCommerceApp.Services.JWTService.JwtService;
 import com.eCommerce.eCommerceApp.Services.UserServiceImp;
 import jakarta.servlet.FilterChain;
@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -44,7 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){
 
-            Users userDetails = (Users) userServiceImp.loadUserByUsername(username);
+            User userDetails = (User) userServiceImp.loadUserByUsername(username);
 
             if (jwtService.isValid(Token, userDetails)){
                 UsernamePasswordAuthenticationToken authToken =

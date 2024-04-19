@@ -1,9 +1,8 @@
 package com.eCommerce.eCommerceApp.Services.JWTService;
 
 import com.eCommerce.eCommerceApp.Models.AuthenticationResponse;
-import com.eCommerce.eCommerceApp.Models.Users;
+import com.eCommerce.eCommerceApp.Models.User;
 import com.eCommerce.eCommerceApp.Repository.UserRepository;
-import org.apache.catalina.User;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,8 +23,8 @@ public class AuthenticationService {
         this.authenticationManager = authenticationManager;
     }
 
-    public AuthenticationResponse registerUser(Users Userrequest){
-        Users user = new Users();
+    public AuthenticationResponse registerUser(User Userrequest){
+        User user = new User();
         user.setFirstName(Userrequest.getFirstName());
         user.setLastName(Userrequest.getLastName());
         user.setUsername(Userrequest.getUsername());
@@ -42,14 +41,14 @@ public class AuthenticationService {
         return new AuthenticationResponse(token);
     }
 
-    public AuthenticationResponse authenticate(Users userRequest){
+    public AuthenticationResponse authenticate(User userRequest){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         userRequest.getUsername(),
                         userRequest.getPassword()
                 )
         );
-        Users user = userRepository.findByUsername(userRequest.getUsername());
+        User user = userRepository.findByUsername(userRequest.getUsername());
         String token = jwtService.generateToken(user);
         return new AuthenticationResponse(token);
     }

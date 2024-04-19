@@ -1,6 +1,6 @@
 package com.eCommerce.eCommerceApp.Services.JWTService;
 
-import com.eCommerce.eCommerceApp.Models.Users;
+import com.eCommerce.eCommerceApp.Models.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -15,7 +15,7 @@ import java.util.function.Function;
 public class JwtService {
     private final String SECRET_KEY= "bcad837f0355f0b449df98be3291a8682e6f3d51bbfef4e655e2739b0a92ad56";
 
-    public String generateToken(Users user){
+    public String generateToken(User user){
         String Token = Jwts.builder()
                 .subject(user.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
@@ -33,7 +33,7 @@ public class JwtService {
         return extraClaims(Token, Claims::getExpiration);
     }
 
-    public boolean isValid(String Token, Users user){
+    public boolean isValid(String Token, User user){
         String username = extractUsername(Token);
         return username.equals(user.getUsername()) && !isTokenExpired(Token);
     }

@@ -1,6 +1,5 @@
 package com.eCommerce.eCommerceApp.Models;
 import jakarta.persistence.*;
-import org.apache.catalina.User;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ public class Cart {
     private Long id;
 
     @OneToOne
-    private Users user;
+    private User user;
 
     @OneToMany(mappedBy = "cart")
     private List<CartItem> cartItems;
@@ -20,7 +19,7 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(Users user) {
+    public Cart(User user) {
         this.user = user;
     }
 
@@ -32,12 +31,12 @@ public class Cart {
         this.id = id;
     }
 
-    public User getUser() {
-        return (User) user;
+    public org.apache.catalina.User getUser() {
+        return (org.apache.catalina.User) user;
     }
 
-    public void setUser(User user) {
-        this.user = (Users) user;
+    public void setUser(org.apache.catalina.User user) {
+        this.user = (User) user;
     }
 
     public List<CartItem> getCartItems() {
