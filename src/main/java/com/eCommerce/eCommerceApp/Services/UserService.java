@@ -12,4 +12,6 @@ public interface UserService {
 
     Users findByUsername(String username);
     Users updateUser(String username, Users updateUser);
+    boolean deleteUser(String username);
+    
 }
