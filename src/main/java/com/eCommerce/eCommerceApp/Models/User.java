@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+public class Users implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userid")
@@ -27,7 +28,7 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.ORDINAL)
     Role role;
 
-    public User(int id, String firstName, String lastName, String username, String password, String email, String phoneNumber, String state, String zipCode, Role role) {
+    public Users(int id, String firstName, String lastName, String username, String password, String email, String phoneNumber, String state, String zipCode, Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,7 +41,7 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public User(){
+    public Users(){
 
     }
 
