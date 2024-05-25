@@ -9,6 +9,13 @@ public interface UserService {
 
     User getUserById(int customerId);
 
+<<<<<<< HEAD
     User findByUsername(String username);
     User updateUser(String username, User updateUser);
+=======
+    Users findByUsername(String username);
+    Users updateUser(String username, Users updateUser);
+    boolean deleteUser(String username);
+    
+>>>>>>> 55407030992756faf8cd64dfd4216b65c0f5c3b4
 }
