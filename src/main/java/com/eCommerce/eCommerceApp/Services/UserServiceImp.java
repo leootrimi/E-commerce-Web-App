@@ -77,17 +77,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
         return null;
     }
 
-    @Override
-    public User deleteUser(String username) {
-        User existingUser = userRepository.findByUsername(username);
-        if (existingUser != null) {
-            userRepository.delete(existingUser);
-            return existingUser;
-        }
-        return null;
-    }
-
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

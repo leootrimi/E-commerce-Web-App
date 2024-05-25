@@ -1,6 +1,7 @@
 package com.eCommerce.eCommerceApp.Models;
 
 import jakarta.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Product {
@@ -14,7 +15,7 @@ public class Product {
 
     private String description;
 
-    private String imageUrl;
+    private MultipartFile file;
 
     private boolean available;
 
@@ -26,11 +27,11 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, double price, String description, String imageUrl, boolean available, Category category) {
+    public Product(String name, double price, String description, MultipartFile file, boolean available, Category category) {
         this.name = name;
         this.price = price;
         this.description = description;
-        this.imageUrl = imageUrl;
+        this.file = file;
         this.available = available;
         this.category = category;
     }
@@ -67,12 +68,12 @@ public class Product {
         this.description = description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public MultipartFile getFile() {
+        return file;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
 
     public boolean isAvailable() {

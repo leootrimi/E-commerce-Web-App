@@ -1,6 +1,5 @@
 package com.eCommerce.eCommerceApp.Controllers;
 
-
 import com.eCommerce.eCommerceApp.Models.User;
 import com.eCommerce.eCommerceApp.Repository.UserRepository;
 import com.eCommerce.eCommerceApp.Services.UserService;
@@ -33,21 +32,11 @@ public class AccountController {
     @PutMapping("/update/{username}")
     public ResponseEntity<?> updateUser(@PathVariable String username, @RequestBody User updatedUser) {
         try{
-            User users = userService.updateUser(username, updatedUser);
+            User user = userService.updateUser(username, updatedUser);
 
             return ResponseEntity.ok().body("User data updated successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating user data");
         }
     }
-    @DeleteMapping("/delete/{username}")
-    public ResponseEntity<?> deleteUser(@PathVariable String username) {
-        try {
-            userService.deleteUser(username);
-            return ResponseEntity.ok().body("User deleted successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting user");
-        }
-    }
 }
-

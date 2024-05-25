@@ -10,43 +10,34 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String category;
+    private String subCategory;
 
 
     @OneToMany(mappedBy = "category")
     private List<Product> products;
 
-    // Constructors, getters, setters
-
     public Category() {
     }
 
-    public Category(String name, String description, String imageUrl) {
-        this.name = name;
-
+    public Category(String category, String subCategory) {
+        this.category = category;
+        this.subCategory = subCategory;
     }
 
-    public Long getId() {
-        return id;
+    public String getCategory() {
+        return category;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public String getName() {
-        return name;
+    public String getSubCategory() {
+        return subCategory;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
     }
 }
