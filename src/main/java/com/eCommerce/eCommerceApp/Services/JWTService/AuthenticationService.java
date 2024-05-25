@@ -53,4 +53,7 @@ public class AuthenticationService {
         return new AuthenticationResponse(token);
     }
 
+    public boolean isUsernameAvailable(String username) {
+        return true;
+    }
 }
