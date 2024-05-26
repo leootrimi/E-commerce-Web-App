@@ -1,5 +1,6 @@
 package com.eCommerce.eCommerceApp.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -10,34 +11,45 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String category;
-    private String subCategory;
+    private String name;
 
 
     @OneToMany(mappedBy = "category")
+    @JsonBackReference
+
     private List<Product> products;
+
+
 
     public Category() {
     }
 
-    public Category(String category, String subCategory) {
-        this.category = category;
-        this.subCategory = subCategory;
+    public Category(String name, String description, String imageUrl) {
+        this.name = name;
+
     }
 
-    public String getCategory() {
-        return category;
+    public Long getId() {
+        return id;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getSubCategory() {
-        return subCategory;
+    public String getName() {
+        return name;
     }
 
-    public void setSubCategory(String subCategory) {
-        this.subCategory = subCategory;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

@@ -1,7 +1,7 @@
 package com.eCommerce.eCommerceApp.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Product {
@@ -9,30 +9,27 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String title;
 
     private double price;
 
+    @Column(length = 1024)
     private String description;
 
-    private MultipartFile file;
-
-    private boolean available;
+    private String image;
 
     @ManyToOne
+    @JsonManagedReference  //mos me i bo infinite loop se postman su ndalishin tu ardh tdhanat kur i bojsha get e kjo i ndal mos mu bo loop
     private Category category;
-
-    // Constructors, getters, setters
 
     public Product() {
     }
 
-    public Product(String name, double price, String description, MultipartFile file, boolean available, Category category) {
-        this.name = name;
+    public Product(String title, double price, String description, String image, Category category) {
+        this.title = title;
         this.price = price;
         this.description = description;
-        this.file = file;
-        this.available = available;
+        this.image = image;
         this.category = category;
     }
 
@@ -44,12 +41,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public double getPrice() {
@@ -68,20 +65,12 @@ public class Product {
         this.description = description;
     }
 
-    public MultipartFile getFile() {
-        return file;
+    public String getImage() {
+        return image;
     }
 
-    public void setFile(MultipartFile file) {
-        this.file = file;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Category getCategory() {

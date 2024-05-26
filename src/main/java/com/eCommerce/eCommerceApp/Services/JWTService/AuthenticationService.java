@@ -1,8 +1,9 @@
 package com.eCommerce.eCommerceApp.Services.JWTService;
 
 import com.eCommerce.eCommerceApp.Models.AuthenticationResponse;
-import com.eCommerce.eCommerceApp.Models.User;
+import com.eCommerce.eCommerceApp.Models.Users;
 import com.eCommerce.eCommerceApp.Repository.UserRepository;
+import org.apache.catalina.User;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,8 +24,8 @@ public class AuthenticationService {
         this.authenticationManager = authenticationManager;
     }
 
-    public AuthenticationResponse registerUser(User Userrequest){
-        User user = new User();
+    public AuthenticationResponse registerUser(Users Userrequest){
+        Users user = new Users();
         user.setFirstName(Userrequest.getFirstName());
         user.setLastName(Userrequest.getLastName());
         user.setUsername(Userrequest.getUsername());
@@ -41,19 +42,16 @@ public class AuthenticationService {
         return new AuthenticationResponse(token);
     }
 
-    public AuthenticationResponse authenticate(User userRequest){
+    public AuthenticationResponse authenticate(Users userRequest){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         userRequest.getUsername(),
                         userRequest.getPassword()
                 )
         );
-        User user = userRepository.findByUsername(userRequest.getUsername());
+        Users user = userRepository.findByUsername(userRequest.getUsername());
         String token = jwtService.generateToken(user);
         return new AuthenticationResponse(token);
     }
 
-    public boolean isUsernameAvailable(String username) {
-        return true;
-    }
 }

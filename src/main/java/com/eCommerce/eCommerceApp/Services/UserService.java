@@ -1,21 +1,17 @@
 package com.eCommerce.eCommerceApp.Services;
 
-import com.eCommerce.eCommerceApp.Models.User;
+import com.eCommerce.eCommerceApp.Models.Users;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 public interface UserService {
-    public void saveUser(User user);
-    public List<User> getAll();
+    public void saveUser(Users user);
+    public List<Users> getAll();
 
-    User getUserById(int customerId);
+    Users getUserById(int customerId);
 
-<<<<<<< HEAD
-    User findByUsername(String username);
-    User updateUser(String username, User updateUser);
-=======
     Users findByUsername(String username);
     Users updateUser(String username, Users updateUser);
     boolean deleteUser(String username);
     
->>>>>>> 55407030992756faf8cd64dfd4216b65c0f5c3b4
 }

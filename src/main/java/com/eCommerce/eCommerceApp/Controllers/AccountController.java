@@ -1,6 +1,6 @@
 package com.eCommerce.eCommerceApp.Controllers;
 
-import com.eCommerce.eCommerceApp.Models.User;
+import com.eCommerce.eCommerceApp.Models.Users;
 import com.eCommerce.eCommerceApp.Repository.UserRepository;
 import com.eCommerce.eCommerceApp.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ public class AccountController {
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<User> getUserById(@PathVariable String username) {
-        User user = userRepository.findByUsername(username);
+    public ResponseEntity<Users> getUserById(@PathVariable String username) {
+        Users user = userRepository.findByUsername(username);
         if (user != null) {
             return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
@@ -30,9 +30,9 @@ public class AccountController {
         }
     }
     @PutMapping("/update/{username}")
-    public ResponseEntity<?> updateUser(@PathVariable String username, @RequestBody User updatedUser) {
+    public ResponseEntity<?> updateUser(@PathVariable String username, @RequestBody Users updatedUser) {
         try{
-            User user = userService.updateUser(username, updatedUser);
+            Users users = userService.updateUser(username, updatedUser);
 
             return ResponseEntity.ok().body("User data updated successfully");
         } catch (Exception e) {
