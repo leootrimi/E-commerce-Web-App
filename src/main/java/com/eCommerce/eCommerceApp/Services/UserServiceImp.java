@@ -1,6 +1,6 @@
 package com.eCommerce.eCommerceApp.Services;
 
-import com.eCommerce.eCommerceApp.Models.User;
+import com.eCommerce.eCommerceApp.Models.Users;
 import com.eCommerce.eCommerceApp.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,30 +17,29 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
 
     @Override
-    public void saveUser(User user) {
-        // Save the user using UserRepository
+    public void saveUser(Users user) {
         userRepository.save(user);
     }
 
     @Override
-    public List<User> getAll() {
+    public List<Users> getAll() {
         return userRepository.findAll();
     }
 
     @Override
-    public User getUserById(int userId) {
+    public Users getUserById(int userId) {
         return userRepository.findById(userId).orElse(null);
     }
 
     @Override
-    public User findByUsername(String username) {
+    public Users findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
     @Override
-    public User updateUser(String username, User updateUser) {
+    public Users updateUser(String username, Users updateUser) {
 
-        User existingUser = userRepository.findByUsername(username);
+        Users existingUser = userRepository.findByUsername(username);
         if (existingUser != null) {
             if (updateUser.getFirstName() != null){
                 existingUser.setFirstName(updateUser.getFirstName());}
@@ -79,7 +78,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Override
 public boolean deleteUser(String username) {
-    User existingUser = userRepository.findByUsername(username);
+    Users existingUser = userRepository.findByUsername(username);
     if (existingUser != null) {
         userRepository.delete(existingUser);
         return true; 

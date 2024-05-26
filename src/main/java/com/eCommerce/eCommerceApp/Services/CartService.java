@@ -1,9 +1,6 @@
 package com.eCommerce.eCommerceApp.Services;
 
-import com.eCommerce.eCommerceApp.Models.Cart;
-import com.eCommerce.eCommerceApp.Models.CartItem;
-import com.eCommerce.eCommerceApp.Models.Product;
-import com.eCommerce.eCommerceApp.Models.Users;
+import com.eCommerce.eCommerceApp.Models.*;
 
 import java.util.List;
 
