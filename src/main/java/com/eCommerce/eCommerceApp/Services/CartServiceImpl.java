@@ -1,27 +1,28 @@
 package com.eCommerce.eCommerceApp.Services;
 
 import com.eCommerce.eCommerceApp.Models.*;
+import com.eCommerce.eCommerceApp.Repository.CartRepository;
+import com.eCommerce.eCommerceApp.Repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+@Service
 public class CartServiceImpl implements CartService {
 
-    // Simulimi i nje baze te dhenash lokale per ruajtjen e karroces
-    private List<Cart> carts = new ArrayList<>();
-
+@Autowired
+    CartRepository cartRepository;
+@Autowired
+    ProductRepository productRepository;
     @Override
-    public Cart getCartByUser(Users user) {
-        // Kerko karrocen per perdoruesin e dhene
-        for (Cart cart : carts) {
-            if (cart.getUser().equals(user)) {
-                return cart;
-            }
-        }
-        // Nese karroca nuk gjendet, kthe null
-        return null;
+    public List<Product> getCartByUser(String username) {
+        return cartRepository.findProductsByUsername(username);
     }
 
+<<<<<<< Updated upstream
     @Override
     public void addToCart(Users user, Product product, int quantity) {
         // Merr karrocen per perdoruesin nese ekziston, ose krijoni nje karroce te re
@@ -45,31 +46,44 @@ public class CartServiceImpl implements CartService {
             CartItem newItem = new CartItem(cart, product, quantity);
             cart.getCartItems().add(newItem);
         }
+=======
+    public int getCount(String username){
+        return cartRepository.countByUsername(username);
+>>>>>>> Stashed changes
     }
 
     @Override
-    public void removeFromCart(Users user, Product product) {
-        // Merr karrocen per perdoruesin
-        Cart cart = getCartByUser(user);
-        if (cart != null) {
-            // Heq produktin nga karroca nese ekziston
-            cart.getCartItems().removeIf(item -> item.getProduct().equals(product));
+    public List<Long> getProductIdsByUsername(String username) {
+        return cartRepository.findProductIdsByUsername(username);
+    }
+
+    @Override
+    public List<Product> getDataFromProductIds(List<Long> productIds) {
+        List<Product> products = new ArrayList<>();
+        for (Long productId : productIds) {
+            Optional<Product> optionalProduct = productRepository.findById(productId);
+            optionalProduct.ifPresent(products::add);
         }
+        return products;
     }
 
     @Override
-    public void clearCart(Users user) {
-        // Merr karrocen per perdoruesin dhe fshij te gjitha produktet
-        Cart cart = getCartByUser(user);
-        if (cart != null) {
-            cart.getCartItems().clear();
+    public Double getTotalPriceofCart(List<Product> products) {
+        if (products == null || products.isEmpty()) {
+            return 0.0;
         }
+        return products.stream()
+                .mapToDouble(Product::getPrice)
+                .sum();
     }
 
     @Override
-    public List<CartItem> getCartItems(Users user) {
-        // Kthe listen e artikujve ne karrocen e nje perdoruesi nese ekziston, ose null nese nuk ka
-        Cart cart = getCartByUser(user);
-        return cart != null ? cart.getCartItems() : null;
+    public void removeProductFromCart(Long productId, String username) {
+        Optional<Cart> cartItem = cartRepository.findFirstByProductIdAndUsername(productId, username);
+        cartItem.ifPresent(cartRepository::delete);
     }
 }
+
+
+
+
