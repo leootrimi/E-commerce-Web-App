@@ -1,22 +1,23 @@
 package com.eCommerce.eCommerceApp.Services;
 
 import com.eCommerce.eCommerceApp.Models.*;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface CartService {
-    // Merr karrocen per nje perdorues
-    Cart getCartByUser(Users user);
+    List<Product> getCartByUser(String username);
 
-    // Shton nje produkt ne karroce
-    void addToCart(Users user, Product product, int quantity);
+    int getCount(String username);
 
-    // Heq nje produkt nga karroca
-    void removeFromCart(Users user, Product product);
+    List<Long> getProductIdsByUsername(String username);
 
-    // Pastron karrocen
-    void clearCart(Users user);
+    List<Product> getDataFromProductIds(List<Long> productIds);
 
-    // Merr listen e artikujve ne karrocen e nje perdoruesi
-    List<CartItem> getCartItems(Users user);
+    Double getTotalPriceofCart(List<Product> products);
+
+    void removeProductFromCart(Long id, String username);
+
+
 }
