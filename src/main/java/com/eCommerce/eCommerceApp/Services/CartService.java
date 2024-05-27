@@ -1,17 +1,7 @@
 package com.eCommerce.eCommerceApp.Services;
 
-<<<<<<< Updated upstream
-import com.eCommerce.eCommerceApp.Models.Cart;
-import com.eCommerce.eCommerceApp.Models.CartItem;
-import com.eCommerce.eCommerceApp.Models.Product;
-import com.eCommerce.eCommerceApp.Models.Users;
-=======
 import com.eCommerce.eCommerceApp.Models.*;
 import org.springframework.stereotype.Service;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 import java.util.List;
 

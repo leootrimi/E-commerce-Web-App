@@ -18,7 +18,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Override
     public void saveUser(Users user) {
-        // Save the user using UserRepository
         userRepository.save(user);
     }
 
@@ -79,7 +78,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Override
 public boolean deleteUser(String username) {
-    User existingUser = userRepository.findByUsername(username);
+    Users existingUser = userRepository.findByUsername(username);
     if (existingUser != null) {
         userRepository.delete(existingUser);
         return true; 
