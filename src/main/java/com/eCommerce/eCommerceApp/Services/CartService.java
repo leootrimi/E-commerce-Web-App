@@ -8,6 +8,9 @@ import com.eCommerce.eCommerceApp.Models.Users;
 =======
 import com.eCommerce.eCommerceApp.Models.*;
 import org.springframework.stereotype.Service;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 import java.util.List;

@@ -23,6 +23,7 @@ public class CartServiceImpl implements CartService {
     }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     @Override
     public void addToCart(Users user, Product product, int quantity) {
         // Merr karrocen per perdoruesin nese ekziston, ose krijoni nje karroce te re
@@ -50,11 +51,16 @@ public class CartServiceImpl implements CartService {
     public int getCount(String username){
         return cartRepository.countByUsername(username);
 >>>>>>> Stashed changes
+=======
+    public int getCount(String username){
+        return cartRepository.countByUsername(username);
+>>>>>>> Stashed changes
     }
 
     @Override
     public List<Long> getProductIdsByUsername(String username) {
         return cartRepository.findProductIdsByUsername(username);
+<<<<<<< Updated upstream
     }
 
     @Override
@@ -78,6 +84,31 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+=======
+    }
+
+    @Override
+    public List<Product> getDataFromProductIds(List<Long> productIds) {
+        List<Product> products = new ArrayList<>();
+        for (Long productId : productIds) {
+            Optional<Product> optionalProduct = productRepository.findById(productId);
+            optionalProduct.ifPresent(products::add);
+        }
+        return products;
+    }
+
+    @Override
+    public Double getTotalPriceofCart(List<Product> products) {
+        if (products == null || products.isEmpty()) {
+            return 0.0;
+        }
+        return products.stream()
+                .mapToDouble(Product::getPrice)
+                .sum();
+    }
+
+    @Override
+>>>>>>> Stashed changes
     public void removeProductFromCart(Long productId, String username) {
         Optional<Cart> cartItem = cartRepository.findFirstByProductIdAndUsername(productId, username);
         cartItem.ifPresent(cartRepository::delete);
