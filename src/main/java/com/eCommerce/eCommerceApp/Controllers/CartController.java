@@ -3,6 +3,7 @@ package com.eCommerce.eCommerceApp.Controllers;
 import com.eCommerce.eCommerceApp.Models.Product;
 import com.eCommerce.eCommerceApp.Services.CartServiceImpl;
 import com.eCommerce.eCommerceApp.Services.UserServiceImp;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/carts")
+@Tag(name = "Cart Functions")
 public class CartController {
     @Autowired
     private CartServiceImpl cartServiceImpl;

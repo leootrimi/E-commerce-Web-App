@@ -2,6 +2,7 @@ package com.eCommerce.eCommerceApp.Controllers;
 
 import com.eCommerce.eCommerceApp.Models.Order;
 import com.eCommerce.eCommerceApp.Services.OrderService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/orders")
+@Tag(name = "Orders Functions")
+
 public class OrderController {
     @Autowired
     private OrderService orderService;

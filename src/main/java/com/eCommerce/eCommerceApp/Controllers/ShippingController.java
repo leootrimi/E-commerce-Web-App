@@ -2,12 +2,15 @@ package com.eCommerce.eCommerceApp.Controllers;
 
 import com.eCommerce.eCommerceApp.Models.Shipping;
 import com.eCommerce.eCommerceApp.Services.ShippingService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/shipping")
+@Tag(name = "Shipping Functions")
+
 public class ShippingController {
 
     ShippingService shippingService;
