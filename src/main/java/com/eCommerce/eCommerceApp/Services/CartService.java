@@ -19,5 +19,6 @@ public interface CartService {
 
     void removeProductFromCart(Long id, String username);
 
+    void deleteByUsername(String username);
 
 }
