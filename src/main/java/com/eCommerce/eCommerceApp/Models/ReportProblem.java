@@ -17,7 +17,7 @@ public class ReportProblem {
 
     private String problemDescription;
 
-    // Constructors, getters, setters
+
 
     public ReportProblem() {
     }

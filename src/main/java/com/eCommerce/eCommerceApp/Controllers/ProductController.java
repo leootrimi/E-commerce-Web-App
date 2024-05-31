@@ -7,6 +7,7 @@ import com.eCommerce.eCommerceApp.Repository.ProductRepository;
 import com.eCommerce.eCommerceApp.Repository.UserRepository;
 import com.eCommerce.eCommerceApp.Services.ProductService;
 import com.eCommerce.eCommerceApp.Services.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
+@Tag(name = "Product Functions")
+
 public class ProductController {
 
     private final ProductService productService;
