@@ -2,13 +2,16 @@ package com.eCommerce.eCommerceApp.Services;
 
 import com.eCommerce.eCommerceApp.Models.Users;
 import com.eCommerce.eCommerceApp.Repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImp implements UserService, UserDetailsService {
@@ -32,8 +35,8 @@ public class UserServiceImp implements UserService, UserDetailsService {
     }
 
     @Override
-    public Users findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public Optional<Users> findByUsername(String username) {
+        return Optional.ofNullable(userRepository.findByUsername(username));
     }
 
     @Override
@@ -75,16 +78,18 @@ public class UserServiceImp implements UserService, UserDetailsService {
         }
         return null;
     }
-
+    @Modifying
+    @Transactional
     @Override
 public boolean deleteUser(String username) {
-    Users existingUser = userRepository.findByUsername(username);
+        boolean result = false;
+        Users existingUser = userRepository.findByUsername(username);
     if (existingUser != null) {
         userRepository.delete(existingUser);
-        return true; 
+        result = true;
     }
-    return false; 
-}
+        return result;
+    }
 
 
 

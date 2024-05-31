@@ -56,6 +56,15 @@ public class CartServiceImpl implements CartService {
         Optional<Cart> cartItem = cartRepository.findFirstByProductIdAndUsername(productId, username);
         cartItem.ifPresent(cartRepository::delete);
     }
+
+    @Override
+    public void deleteByUsername(String username) {
+        try {
+            cartRepository.deleteByUsername(username);
+        } catch (Exception e){
+
+        }
+    }
 }
 
 
