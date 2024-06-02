@@ -1,8 +1,8 @@
 package com.eCommerce.eCommerceApp.Controllers;
 
 import com.eCommerce.eCommerceApp.Models.Product;
-import com.eCommerce.eCommerceApp.Services.CartServiceImpl;
-import com.eCommerce.eCommerceApp.Services.UserServiceImp;
+import com.eCommerce.eCommerceApp.Services.ServiceImpl.CartServiceImpl;
+import com.eCommerce.eCommerceApp.Services.ServiceImpl.UserServiceImp;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
