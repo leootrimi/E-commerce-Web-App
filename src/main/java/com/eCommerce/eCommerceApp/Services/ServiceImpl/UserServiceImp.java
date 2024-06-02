@@ -1,7 +1,8 @@
-package com.eCommerce.eCommerceApp.Services;
+package com.eCommerce.eCommerceApp.Services.ServiceImpl;
 
 import com.eCommerce.eCommerceApp.Models.Users;
 import com.eCommerce.eCommerceApp.Repository.UserRepository;
+import com.eCommerce.eCommerceApp.Services.Service.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
