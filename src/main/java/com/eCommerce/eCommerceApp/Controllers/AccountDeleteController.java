@@ -1,10 +1,11 @@
 package com.eCommerce.eCommerceApp.Controllers;
 
 import com.eCommerce.eCommerceApp.Models.AccountDelete;
-import com.eCommerce.eCommerceApp.Services.AccountDeleteService;
-import com.eCommerce.eCommerceApp.Services.CartService;
-import com.eCommerce.eCommerceApp.Services.OrderService;
-import com.eCommerce.eCommerceApp.Services.UserService;
+
+import com.eCommerce.eCommerceApp.Services.Service.AccountDeleteService;
+import com.eCommerce.eCommerceApp.Services.Service.CartService;
+import com.eCommerce.eCommerceApp.Services.Service.OrderService;
+import com.eCommerce.eCommerceApp.Services.Service.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ import java.util.List;
 @RequestMapping("/delete")
 @SecurityRequirement(name = "bearerAuth")
 public class AccountDeleteController {
-
+@Autowired
     private final AccountDeleteService accountDeleteService;
     private final UserService userService;
     private final OrderService orderService;

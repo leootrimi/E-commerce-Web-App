@@ -1,14 +1,14 @@
 package com.eCommerce.eCommerceApp.Controllers;
 
+import com.eCommerce.eCommerceApp.Exceptions.Product.InternalServerErrorException;
+import com.eCommerce.eCommerceApp.Exceptions.Product.InvalidProductFormatException;
+import com.eCommerce.eCommerceApp.Exceptions.Product.ProductNotFoundException;
 import com.eCommerce.eCommerceApp.Models.Cart;
 import com.eCommerce.eCommerceApp.Models.Product;
-import com.eCommerce.eCommerceApp.Models.Users;
 import com.eCommerce.eCommerceApp.Repository.ProductRepository;
-import com.eCommerce.eCommerceApp.Repository.UserRepository;
-import com.eCommerce.eCommerceApp.Services.ProductService;
-import com.eCommerce.eCommerceApp.Services.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.transaction.Transactional;
+import com.eCommerce.eCommerceApp.Services.Service.ProductService;
+import com.eCommerce.eCommerceApp.Services.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +54,7 @@ public class ProductController {
         if (product != null) {
             return ResponseEntity.ok(product);
         } else {
-            return ResponseEntity.notFound().build();
+            throw new ProductNotFoundException("Product with id " + id + " not found");
         }
     }
 
@@ -64,6 +64,7 @@ public class ProductController {
             String username = (String) requestData.get("username");
             Long productId = Long.parseLong(String.valueOf(requestData.get("productId")));
 
+
             System.out.println(username);
 
             Cart addcart = new Cart(productId, username);
@@ -71,9 +72,9 @@ public class ProductController {
             productService.saveCart(addcart);
             return ResponseEntity.ok("Product added to cart successfully.");
         } catch (NumberFormatException e) {
-            return ResponseEntity.badRequest().body("Invalid productId format");
+            throw new InvalidProductFormatException("Invalid productId format");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            throw new InternalServerErrorException("An unexpected error occurred");
         }
     }
 

@@ -1,9 +1,10 @@
 package com.eCommerce.eCommerceApp.Config;
 
 import com.eCommerce.eCommerceApp.Filter.JwtAuthenticationFilter;
-import com.eCommerce.eCommerceApp.Services.UserServiceImp;
+import com.eCommerce.eCommerceApp.Services.ServiceImpl.UserServiceImp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,8 +20,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final UserServiceImp userServiceImp;
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private UserServiceImp userServiceImp;
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     public SecurityConfig(UserServiceImp userServiceImp, JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.userServiceImp = userServiceImp;
@@ -28,22 +29,23 @@ public class SecurityConfig {
     }
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req -> req
-                        .requestMatchers("/login/**", "/register/**", "/api/getproducts", "/api/products/**", "api/getproductsCategory/**",
-                                "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/swagger-ui/index.html")
-                        .permitAll()
-                        .anyRequest()
-                        .authenticated())
-                .userDetailsService(userServiceImp)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-        return http.build();
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+        return  http.
+                csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(
+                        req -> req.requestMatchers("/login/**" , "/register/**", "/api/getproducts" , "/api/products/**", "api/getproductsCategory/**")
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated()
+                ).userDetailsService(userServiceImp)
+                .sessionManagement(
+                        session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
@@ -51,4 +53,7 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
+
+
 }
+

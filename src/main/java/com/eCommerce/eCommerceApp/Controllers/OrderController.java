@@ -1,7 +1,7 @@
 package com.eCommerce.eCommerceApp.Controllers;
 
 import com.eCommerce.eCommerceApp.Models.Order;
-import com.eCommerce.eCommerceApp.Services.OrderService;
+import com.eCommerce.eCommerceApp.Services.Service.OrderService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
