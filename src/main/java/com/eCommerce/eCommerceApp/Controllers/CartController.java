@@ -1,5 +1,9 @@
 package com.eCommerce.eCommerceApp.Controllers;
 
+import com.eCommerce.eCommerceApp.Exceptions.Cart.CartCountRetrivalException;
+import com.eCommerce.eCommerceApp.Exceptions.Cart.ProductRemovalFromCartException;
+import com.eCommerce.eCommerceApp.Exceptions.Cart.ProductsRetrievalByUsernameException;
+import com.eCommerce.eCommerceApp.Exceptions.Cart.TotalPriceCalculationException;
 import com.eCommerce.eCommerceApp.Models.Product;
 import com.eCommerce.eCommerceApp.Services.ServiceImpl.CartServiceImpl;
 import com.eCommerce.eCommerceApp.Services.ServiceImpl.UserServiceImp;
@@ -27,25 +31,26 @@ public class CartController {
     public ResponseEntity<Integer> getCartCountByUsername(@PathVariable String username) {
         try {
             int count = cartServiceImpl.getCount(username);
-
-            System.out.println("Times found "  + count);
+            System.out.println("Times found " + count);
             return ResponseEntity.ok(count);
-
         } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            throw new CartCountRetrivalException("An error occurred while getting cart count for username: " + username);
         }
     }
 
     @GetMapping("/findByUsername/{username}")
     public ResponseEntity<List<Product>> getProductsByUsername(@PathVariable String username) {
         try {
-            List<Long> productsId = cartServiceImpl.getProductIdsByUsername(username);
-            List<Product> products = cartServiceImpl.getDataFromProductIds(productsId);
+            List<Long> productIds = cartServiceImpl.getProductIdsByUsername(username);
+            if (productIds.isEmpty()) {
+                throw new ProductsRetrievalByUsernameException("No products found for username: " + username);
+            }
+            List<Product> products = cartServiceImpl.getDataFromProductIds(productIds);
             return ResponseEntity.ok(products);
+        } catch (ProductsRetrievalByUsernameException e) {
+            throw e;
         } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            throw new ProductsRetrievalByUsernameException("An error occurred while getting products for username: " + username);
         }
     }
 
@@ -55,25 +60,25 @@ public class CartController {
             cartServiceImpl.removeProductFromCart(id, username);
             return ResponseEntity.ok("Product removed from cart successfully");
         } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to remove product from cart");
+            throw new ProductRemovalFromCartException("Failed to remove product from cart for username: " + username);
         }
     }
 
     @GetMapping("/totalPrice/{username}")
-    public ResponseEntity<Double> totalPrice(@PathVariable String username){
+    public ResponseEntity<Double> totalPrice(@PathVariable String username) {
         try {
             List<Long> productIDs = cartServiceImpl.getProductIdsByUsername(username);
+            if (productIDs.isEmpty()) {
+                throw new TotalPriceCalculationException("No products found for username: " + username);
+            }
             List<Product> products = cartServiceImpl.getDataFromProductIds(productIDs);
             double total = cartServiceImpl.getTotalPriceofCart(products);
             return ResponseEntity.ok(total);
-        } catch (Exception e){
-            return ResponseEntity.status(404).build();
+        } catch (TotalPriceCalculationException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new TotalPriceCalculationException("An error occurred while calculating total price for username: " + username);
         }
     }
-
-
-
-
 
 }
