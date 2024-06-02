@@ -64,12 +64,11 @@ public class ProductController {
             String username = (String) requestData.get("username");
             Long productId = Long.parseLong(String.valueOf(requestData.get("productId")));
 
-
             System.out.println(username);
 
-            Cart addcart = new Cart(productId, username);
+            Cart addCart = new Cart(productId, username);
 
-            productService.saveCart(addcart);
+            productService.saveCart(addCart);
             return ResponseEntity.ok("Product added to cart successfully.");
         } catch (NumberFormatException e) {
             throw new InvalidProductFormatException("Invalid productId format");

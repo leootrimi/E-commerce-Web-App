@@ -1,5 +1,8 @@
 package com.eCommerce.eCommerceApp.Controllers;
 
+import com.eCommerce.eCommerceApp.Exceptions.Users.UserDeletionException;
+import com.eCommerce.eCommerceApp.Exceptions.Users.UserNotFoundException;
+import com.eCommerce.eCommerceApp.Exceptions.Users.UserUpdateException;
 import com.eCommerce.eCommerceApp.Models.Users;
 import com.eCommerce.eCommerceApp.Repository.UserRepository;
 import com.eCommerce.eCommerceApp.Services.Service.UserService;
@@ -26,22 +29,21 @@ public class AccountController {
     public ResponseEntity<Users> getUserById(@PathVariable String username) {
         Users user = userRepository.findByUsername(username);
         if (user != null) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            return ResponseEntity.ok(user);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new UserNotFoundException("User with username " + username + " not found");
         }
     }
+
     @PutMapping("/update/{username}")
     public ResponseEntity<?> updateUser(@PathVariable String username, @RequestBody Users updatedUser) {
-        try{
+        try {
             Users users = userService.updateUser(username, updatedUser);
-
             return ResponseEntity.ok().body("User data updated successfully");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating user data");
+            throw new UserUpdateException("Error updating user data for username " + username);
         }
     }
-
 
     @DeleteMapping("/delete/{username}")
     public ResponseEntity<?> deleteUser(@PathVariable String username) {
@@ -50,10 +52,11 @@ public class AccountController {
             if (deleted) {
                 return ResponseEntity.ok().body("User deleted successfully");
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+                throw new UserNotFoundException("User with username " + username + " not found");
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting user");
+            throw new UserDeletionException("Error deleting user with username " + username);
         }
-    } 
+    }
+
 }

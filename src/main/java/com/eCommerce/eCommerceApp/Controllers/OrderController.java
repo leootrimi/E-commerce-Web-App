@@ -1,5 +1,8 @@
 package com.eCommerce.eCommerceApp.Controllers;
 
+import com.eCommerce.eCommerceApp.Exceptions.Order.OrderCreationException;
+import com.eCommerce.eCommerceApp.Exceptions.Order.OrderDeletionException;
+import com.eCommerce.eCommerceApp.Exceptions.Order.OrderNotFoundException;
 import com.eCommerce.eCommerceApp.Models.Order;
 import com.eCommerce.eCommerceApp.Services.Service.OrderService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,19 +28,29 @@ public class OrderController {
     @GetMapping("/{orderId}")
     public ResponseEntity<Order> getOrderById(@PathVariable Long orderId) {
         Optional<Order> order = orderService.findOrderById(orderId);
-        return order.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        if (order.isPresent()) {
+            return ResponseEntity.ok(order.get());
+        } else {
+            throw new OrderNotFoundException("Order with id " + orderId + " not found");
+        }
     }
 
     @PostMapping
     public Order createOrder(@RequestBody Order order) {
-        return orderService.saveOrder(order);
+        try {
+            return orderService.saveOrder(order);
+        } catch (Exception e) {
+            throw new OrderCreationException("Failed to create order");
+        }
     }
 
     @DeleteMapping("/{orderId}")
     public void deleteOrder(@PathVariable Long orderId) {
-        orderService.deleteOrder(orderId);
+        try {
+            orderService.deleteOrder(orderId);
+        } catch (Exception e) {
+            throw new OrderDeletionException("Failed to delete order with id " + orderId);
+        }
     }
-
-
 }
 
