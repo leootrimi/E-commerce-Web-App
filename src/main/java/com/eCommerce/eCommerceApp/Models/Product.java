@@ -1,5 +1,6 @@
 package com.eCommerce.eCommerceApp.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,30 +9,27 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String title;
 
     private double price;
 
+    @Column(length = 1024)
     private String description;
 
-    private String imageUrl;
-
-    private boolean available;
+    private String image;
 
     @ManyToOne
+    @JsonManagedReference  //mos me i bo infinite loop se postman su ndalishin tu ardh tdhanat kur i bojsha get e kjo i ndal mos mu bo loop
     private Category category;
-
-    // Constructors, getters, setters
 
     public Product() {
     }
 
-    public Product(String name, double price, String description, String imageUrl, boolean available, Category category) {
-        this.name = name;
+    public Product(String title, double price, String description, String image, Category category) {
+        this.title = title;
         this.price = price;
         this.description = description;
-        this.imageUrl = imageUrl;
-        this.available = available;
+        this.image = image;
         this.category = category;
     }
 
@@ -43,12 +41,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public double getPrice() {
@@ -67,20 +65,12 @@ public class Product {
         this.description = description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Category getCategory() {
